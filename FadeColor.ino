@@ -88,14 +88,6 @@ void fadeColor() {
 }
 
 void setAllLEDs(CRGB color) {
-	setAllLEDs(leds_left, leds_left_size, color);
-	setAllLEDs(leds_right,leds_right_size, color);
-	setAllLEDs(leds_top, leds_top_size, color);
-	//setAllLEDs(leds_bottom, color);
+	fill_solid(leds_all, LEDS_ALL_SIZE, color);
 }
 
-void setAllLEDs(CRGB *leds, int size, CRGB color) {
-	for (int i = 0; i < size; i++) {
-		leds[i] = color;
-	}
-}

@@ -13,11 +13,11 @@ void singleDots() {
 		}
 
 		if (drawWorm) {
-			setLED(0, CRGB(255,255,0));
-			setLED(total_size/2, CRGB(255,0,0));
+			leds_all[0] = CRGB(255,255,0);
+			leds_all[total_size/2] = CRGB(255,0,0);
 		} else {
-			setLED(0, CRGB(0, 0, 0));
-			setLED(total_size/2, CRGB(0, 0, 0));
+			leds_all[0] = CRGB(0, 0, 0);
+			leds_all[total_size/2] = CRGB(0, 0, 0);
 		}
 
 		FastLED.show();

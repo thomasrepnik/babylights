@@ -18,9 +18,9 @@ void walkWorms() {
 		}
 
 		if (drawWorm) {
-			setLED(0, CRGB(color));
+			leds_all[0] = CRGB(color);
 		} else {
-			setLED(0, CRGB(0, 0, 0));
+			leds_all[0] = CRGB(0, 0, 0);
 		}
 
 		FastLED.show();
@@ -41,9 +41,9 @@ void moveAllToRight() {
 	for (int i = total_size - 1; i >= 0; i--) {
 
 		if (i == 0) {
-			setLED(i, getLED(total_size - 1));
+			leds_all[i] = leds_all[total_size - 1];
 		} else {
-			setLED(i, getLED(i - 1));
+			leds_all[i] = leds_all[i-1];
 		}
 	}
 
