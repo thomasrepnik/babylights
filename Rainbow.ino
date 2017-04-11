@@ -2,21 +2,7 @@
 
 void rainbow(unsigned int durationMillis) {
 
-//	CRGBArray<3> colors;
-//	CRGBSet beginning(colors(1, 2));  //set custom ranges
-//	CRGB colorBeginning(0, 255, 0);  //give names to colors
-//	beginning = colorBeginning;
-//	FastLED.show();
-
-	//color2s.fill_rainbow(50);
-//	CRGBArray<total_size> a;
-//	a.fill_rainbow(50, 200);
-//	FastLED.clearData();
-//	FastLED.addLeds<APA102>(a, 5);
-//	FastLED.show();
 	unsigned long startTime = millis();
-	unsigned long nearMax = 4294967295;
-
 
 	CRGB colors[9];
 	colors[0] = CRGB(255,0,0);
@@ -49,8 +35,9 @@ void rainbow(unsigned int durationMillis) {
 		FastLED.show();
 		FastLED.delay(50);
 
-		if (abs(++nearMax-startTime) > durationMillis){
-			return;
+		if (millis() - startTime > durationMillis){
+			exitAnimation();
+			break;
 		}
 	}
 

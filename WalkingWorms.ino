@@ -1,7 +1,9 @@
 #define WORM_LENGTH 3
 #define WORM_GAP    3
 
-void walkWorms() {
+void walkWorms(unsigned int durationMillis) {
+
+	unsigned long startTime = millis();
 
 	bool drawWorm = true;
 	uint32_t color = 0x0000FF;
@@ -33,6 +35,11 @@ void walkWorms() {
 		moveAllToRight();
 		FastLED.show();
 		FastLED.delay(50);
+
+		if (millis() - startTime > durationMillis){
+			exitAnimation();
+			break;
+		}
 	}
 
 }

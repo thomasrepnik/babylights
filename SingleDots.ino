@@ -1,8 +1,10 @@
 
 
-void singleDots() {
+void singleDots(unsigned int durationMillis) {
 
 	bool drawWorm = false;
+	unsigned long startTime = millis();
+
 
 	for (int i = 0; i < total_size / 2; i++) {
 
@@ -30,6 +32,11 @@ void singleDots() {
 		moveAllToRight();
 		FastLED.show();
 		FastLED.delay(100);
+
+		if (millis() - startTime > durationMillis){
+			exitAnimation();
+			break;
+		}
 	}
 
 }

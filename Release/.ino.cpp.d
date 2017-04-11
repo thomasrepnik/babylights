@@ -48,8 +48,8 @@
  /Applications/sloeber.app/Contents/Eclipse/arduinoPlugin/libraries/FastLED/3.1.3/fastspi_bitbang.h \
  /Applications/sloeber.app/Contents/Eclipse/arduinoPlugin/libraries/FastLED/3.1.3/fastled_delay.h \
  /Applications/sloeber.app/Contents/Eclipse/arduinoPlugin/libraries/FastLED/3.1.3/chipsets.h \
- ../Blink.ino ../FadeColor.ino ../Rainbow.ino ../Random.ino \
- ../SingleDots.ino ../Twinkle.ino ../WalkingWorms.ino
+ ../Blink.ino ../BrightStrips.ino ../EndAnimation.ino ../FadeColor.ino \
+ ../Rainbow.ino ../SingleDots.ino ../Twinkle.ino ../WalkingWorms.ino
 
 /Applications/sloeber.app/Contents/Eclipse/arduinoPlugin/packages/arduino/hardware/avr/1.6.18/cores/arduino/Arduino.h:
 
@@ -151,11 +151,13 @@
 
 ../Blink.ino:
 
+../BrightStrips.ino:
+
+../EndAnimation.ino:
+
 ../FadeColor.ino:
 
 ../Rainbow.ino:
-
-../Random.ino:
 
 ../SingleDots.ino:
 

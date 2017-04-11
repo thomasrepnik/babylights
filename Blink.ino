@@ -9,6 +9,7 @@
 
 #define NUM_LEDS_SHORT 60 // Number of LEDs in strip
 #define NUM_LEDS_LONG 60 // Number of LEDs in strip
+#define SHOW_LENGTH_MILLIS 60000
 
 // Here's how to control the LEDs from any two pins:
 #define DATA_PIN_2    2
@@ -57,69 +58,29 @@ void setup() {
 	LEDS_TOP_SIZE);
 	//FastLED.addLeds<APA102, DATA_PIN, CLOCK_PIN, BGR>(leds_bottom, LEDS_BOTTOM_SIZE);
 
-}
+	Serial.println(sin8_C(0));
+	Serial.println(sin8_C(63));
 
-
-void fadeToBlack2(int numFadingLeds) {
-
-	fill_solid(leds_left, leds_left_size, CRGB(255, 0, 0));
-	FastLED.delay(3000);
-	int factor = 5;
-	int delta = 20;
-	int middle = 0;
-	int middle_left = 0;
-	int middle_right = 0;
-
-	if (leds_left_size % 2 == 0) {
-		//Gerade Zahl -> Zwei Zahlen in der Mitte
-		middle_left = leds_left_size / 2;
-		middle_right = middle_left + 1;
-
-		int tail_right = middle_right;
-
-	    while (tail_right <= leds_left_size - 1){
-	    	for (int i = 0; i < numFadingLeds; i++){
-				leds_left[tail_right + i].fadeToBlackBy(min(delta * (5 - i), 255));
-				FastLED.show();
-	    	}
-
-	    	if (leds_left[tail_right].getLuma() == 0){
-	    		tail_right++;
-	    	}
-	    }
-
-
-
-
-	} else {
-		//Ungerade Zahl --> eine Zahl in der Mitte
-		middle = leds_left_size / 2;
-	}
-
-
-
-//	for (int i = 0; i < 255; i++) {
-//		fadeToBlackBy(leds_left, leds_left_size, 1);
-//		fadeToBlackBy(leds_top, leds_left_size, 1);
-//		fadeToBlackBy(leds_right, leds_left_size, 1);
-//
-//		FastLED.show();
-//		FastLED.delay(10);
-//	}
+	Serial.println(sin8_C(127));
+	Serial.println(sin8_C(190));
+	Serial.println(sin8_C(255));
 
 }
 
 void loop() {
+	brightStrips(SHOW_LENGTH_MILLIS);
 
+	twinkle(SHOW_LENGTH_MILLIS);
 
-	//test124();
-	rainbow(20000);
-	//fadeToBlack(10);
-	//walkWorms();
-	//randomColors();
+	rainbow(SHOW_LENGTH_MILLIS);
 
-	Serial.println(LEDS.getFPS());
-	//fadeColor();
+	walkWorms(SHOW_LENGTH_MILLIS);
+
+	fadeColor(SHOW_LENGTH_MILLIS);
+
+	singleDots(SHOW_LENGTH_MILLIS);
+
+	//Serial.println(LEDS.getFPS());
 	//singleDots();
 }
 
