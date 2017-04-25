@@ -7,23 +7,23 @@
 
 #include "FastLED.h"
 
-#define NUM_LEDS_SHORT 60 // Number of LEDs in strip
-#define NUM_LEDS_LONG 60 // Number of LEDs in strip
-#define SHOW_LENGTH_MILLIS 60000
+#define SHOW_LENGTH_MILLIS 15000
 
 // Here's how to control the LEDs from any two pins:
-#define DATA_PIN_2    2
-#define CLOCK_PIN_2   3
-#define DATA_PIN      4
-#define CLOCK_PIN     5
-#define DATA_PIN_3    6
-#define CLOCK_PIN_3   7
+#define DATA_PIN_LEFT     2
+#define CLOCK_PIN_LEFT    3
+#define DATA_PIN_TOP      4
+#define CLOCK_PIN_TOP     5
+#define DATA_PIN_RIGHT    6
+#define CLOCK_PIN_RIGHT   7
+#define DATA_PIN_BOTTOM   8
+#define CLOCK_PIN_BOTTOM  9
 
-#define LEDS_LEFT_SIZE  NUM_LEDS_SHORT
-#define LEDS_RIGHT_SIZE  NUM_LEDS_SHORT
-#define LEDS_TOP_SIZE  NUM_LEDS_LONG
-#define LEDS_BOTTOM_SIZE  NUM_LEDS_LONG
-#define LEDS_ALL_SIZE  LEDS_LEFT_SIZE + LEDS_RIGHT_SIZE + LEDS_TOP_SIZE// + LEDS_BOTTOM_SIZE
+#define LEDS_LEFT_SIZE  20
+#define LEDS_RIGHT_SIZE  21
+#define LEDS_TOP_SIZE  46
+#define LEDS_BOTTOM_SIZE  46
+#define LEDS_ALL_SIZE  LEDS_LEFT_SIZE + LEDS_RIGHT_SIZE + LEDS_TOP_SIZE + LEDS_BOTTOM_SIZE
 
 
 const int leds_left_size = LEDS_LEFT_SIZE;
@@ -41,6 +41,9 @@ CRGB* leds_top    = leds_all + LEDS_LEFT_SIZE;
 CRGB* leds_right  = leds_all + LEDS_LEFT_SIZE + LEDS_TOP_SIZE;
 CRGB* leds_bottom  = leds_all + LEDS_LEFT_SIZE + LEDS_TOP_SIZE + LEDS_RIGHT_SIZE;
 
+CRGB *leds_all_ordered[LEDS_ALL_SIZE];
+
+int counter = 0;
 
 void setup() {
 	delay(2000);
@@ -50,24 +53,29 @@ void setup() {
 	FastLED.setBrightness(50);
 	FastLED.setMaxPowerInVoltsAndMilliamps(5, 2000);
 
-	FastLED.addLeds<APA102, DATA_PIN, CLOCK_PIN, BGR>(leds_left,
-	LEDS_RIGHT_SIZE);
-	FastLED.addLeds<APA102, DATA_PIN_2, CLOCK_PIN_2, BGR>(leds_right,
-	LEDS_LEFT_SIZE);
-	FastLED.addLeds<APA102, DATA_PIN_3, CLOCK_PIN_3, BGR>(leds_top,
-	LEDS_TOP_SIZE);
-	//FastLED.addLeds<APA102, DATA_PIN, CLOCK_PIN, BGR>(leds_bottom, LEDS_BOTTOM_SIZE);
+	FastLED.addLeds<APA102, DATA_PIN_LEFT, CLOCK_PIN_LEFT, BGR>(leds_left, LEDS_LEFT_SIZE);
+	FastLED.addLeds<APA102, DATA_PIN_TOP, CLOCK_PIN_TOP, BGR>(leds_top, LEDS_TOP_SIZE);
+	FastLED.addLeds<APA102, DATA_PIN_RIGHT, CLOCK_PIN_RIGHT, BGR>(leds_right, LEDS_RIGHT_SIZE);
+	FastLED.addLeds<APA102, DATA_PIN_BOTTOM, CLOCK_PIN_BOTTOM, BGR>(leds_bottom, LEDS_BOTTOM_SIZE);
 
-	Serial.println(sin8_C(0));
-	Serial.println(sin8_C(63));
+	for (int i = 0; i < LEDS_ALL_SIZE; i++) {
+	  if (i < LEDS_LEFT_SIZE){
+		  leds_all_ordered[i] = &leds_all[LEDS_LEFT_SIZE - i - 1];
+		  printFmt("%d --> %d",i, LEDS_LEFT_SIZE - i - 1);
+	  }else if (i >= LEDS_LEFT_SIZE + LEDS_TOP_SIZE && i < LEDS_LEFT_SIZE + LEDS_TOP_SIZE + LEDS_RIGHT_SIZE){
+		  leds_all_ordered[i] = &leds_all[LEDS_LEFT_SIZE + LEDS_TOP_SIZE + LEDS_RIGHT_SIZE - i - 1 + LEDS_LEFT_SIZE + LEDS_TOP_SIZE];
+		  printFmt("%d --> %d",i, LEDS_LEFT_SIZE + LEDS_TOP_SIZE + LEDS_RIGHT_SIZE - i - 1 + LEDS_LEFT_SIZE + LEDS_TOP_SIZE);
+	  }else{
+		  leds_all_ordered[i] = &leds_all[i]; /* assign the address of integer. */
+		  printFmt("%d --> %d",i, i);
+	  }
+	}
 
-	Serial.println(sin8_C(127));
-	Serial.println(sin8_C(190));
-	Serial.println(sin8_C(255));
 
 }
 
 void loop() {
+
 	brightStrips(SHOW_LENGTH_MILLIS);
 
 	twinkle(SHOW_LENGTH_MILLIS);

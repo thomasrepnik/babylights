@@ -15,11 +15,11 @@ void singleDots(unsigned int durationMillis) {
 		}
 
 		if (drawWorm) {
-			leds_all[0] = CRGB(255,255,0);
-			leds_all[total_size/2] = CRGB(255,0,0);
+			*leds_all_ordered[0] = CRGB(255,255,0);
+			*leds_all_ordered[total_size/2] = CRGB(255,0,0);
 		} else {
-			leds_all[0] = CRGB(0, 0, 0);
-			leds_all[total_size/2] = CRGB(0, 0, 0);
+			*leds_all_ordered[0] = CRGB(0, 0, 0);
+			*leds_all_ordered[total_size/2] = CRGB(0, 0, 0);
 		}
 
 		FastLED.show();

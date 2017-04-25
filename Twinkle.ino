@@ -26,7 +26,7 @@ void twinkle(unsigned int durationMillis) {
 void confetti() {                                             // random colored speckles that blink in and fade smoothly
   fadeToBlackBy(leds_all, total_size, twinkle_fadespeed);                    // Low values = slower fade.
   int pos = random16(total_size);                               // Pick an LED at random.
-  leds_all[pos] += CHSV((twinkle_starthue + random16(twinkle_huediff))/4 , twinkle_saturation, twinkle_brightness);  // I use 12 bits for hue so that the hue increment isn't too quick.
+  *leds_all_ordered[pos] += CHSV((twinkle_starthue + random16(twinkle_huediff))/4 , twinkle_saturation, twinkle_brightness);  // I use 12 bits for hue so that the hue increment isn't too quick.
   twinkle_starthue = twinkle_starthue + twinkle_hueincrement;                                // It increments here.
 } // confetti()
 

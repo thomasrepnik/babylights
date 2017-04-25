@@ -2,10 +2,11 @@
 //This is a automatic generated file
 //Please do not modify this file
 //If you touch this file your change will be overwritten during the next build
-//This file has been generated on 2017-04-11 22:34:15
+//This file has been generated on 2017-04-25 20:31:57
 
 #include "Arduino.h"
 #include "FastLED.h"
+#include <stdarg.h>
 void setup() ;
 void loop() ;
 void showfps();
@@ -15,6 +16,7 @@ void exitAnimation();
 void fadeColor(unsigned int durationMillis) ;
 bool isAnimationTimeExceeded(unsigned long startTime, 		unsigned long durationMillis) ;
 void setAllLEDs(CRGB color) ;
+void printFmt(char *fmt, ...) ;
 void rainbow(unsigned int durationMillis) ;
 void fadePixel(CRGB startColor, CRGB endColor, int step) ;
 void singleDots(unsigned int durationMillis) ;
@@ -28,6 +30,7 @@ void moveAllToRight() ;
 #include "BrightStrips.ino"
 #include "EndAnimation.ino"
 #include "FadeColor.ino"
+#include "PrintHelper.ino"
 #include "Rainbow.ino"
 #include "SingleDots.ino"
 #include "Twinkle.ino"

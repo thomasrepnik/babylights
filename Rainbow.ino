@@ -74,7 +74,7 @@ void fadePixel(CRGB startColor, CRGB endColor, int step) {
 		new_b = startColor.b - (step * b_step);
 	}
 
-	leds_all[0] = CRGB(new_r, new_g, new_b);
+	*leds_all_ordered[0] = CRGB(new_r, new_g, new_b);
 
 }
 

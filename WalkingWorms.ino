@@ -20,9 +20,9 @@ void walkWorms(unsigned int durationMillis) {
 		}
 
 		if (drawWorm) {
-			leds_all[0] = CRGB(color);
+			*leds_all_ordered[0] = CRGB(color);
 		} else {
-			leds_all[0] = CRGB(0, 0, 0);
+			*leds_all_ordered[0] = CRGB(0, 0, 0);
 		}
 
 		FastLED.show();
@@ -48,9 +48,9 @@ void moveAllToRight() {
 	for (int i = total_size - 1; i >= 0; i--) {
 
 		if (i == 0) {
-			leds_all[i] = leds_all[total_size - 1];
+			*leds_all_ordered[i] = *leds_all_ordered[total_size - 1];
 		} else {
-			leds_all[i] = leds_all[i-1];
+			*leds_all_ordered[i] = *leds_all_ordered[i-1];
 		}
 	}
 

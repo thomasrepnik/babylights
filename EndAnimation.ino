@@ -8,12 +8,12 @@ void endAnimation() {
 
 
 		for (int i = 0; i<10; i++){
-			leds_all[index + i].fadeToBlackBy(map(i, 0,9, 40, 30));
+			leds_all_ordered[index + i]->fadeToBlackBy(map(i, 0,9, 40, 30));
 		}
 
 
-		if (leds_all[index].getLuma()==0){
-			leds_all[index].fadeToBlackBy(255);
+		if (leds_all_ordered[index]->getLuma()==0){
+			leds_all_ordered[index]->fadeToBlackBy(255);
 			index++;
 		}
 		FastLED.show();

@@ -14,10 +14,10 @@ void brightStrips(unsigned int durationMillis) {
 
 	for (int s = 0; s < STRIP_COUNT; s++){
 		for (int i = 0; i<STRIP_LENGTH; i++){
-			leds_all[index++] = CHSV(strips_starthue , triwave8(map(i, 0, STRIP_LENGTH, 60, 255 - 60)),  triwave8(map(i, 0, STRIP_LENGTH, 10,245)));
+			*leds_all_ordered[index++] = CHSV(strips_starthue , triwave8(map(i, 0, STRIP_LENGTH, 60, 255 - 60)),  triwave8(map(i, 0, STRIP_LENGTH, 10,245)));
 		}
 		for (int y = 0; y < deltaBetweenStrips; y++){
-			leds_all[index++] = CRGB::Black;
+			*leds_all_ordered[index++] = CRGB::Black;
 		}
 		strips_starthue += strips_huedelta;
 	}
